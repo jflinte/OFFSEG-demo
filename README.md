@@ -1,7 +1,9 @@
 # OFFSEG-demo
 
 
-# Code
+# OFFSEG pipeline.py 
+
+#### Header Information
 ```
 # -*- coding: utf-8 -*-
 """
@@ -9,30 +11,36 @@ Created on Wed Feb 10 15:07:05 2021
 
 @author: KASI VISWANATH && KARTIKEYA SINGH
 """
-import cv2
-import sys
-import numpy as np
-import tensorflow as tf
-import pandas as pd
-#from libKMCUDA import kmeans_cuda
-from PIL import Image,ImageOps
-import time
-import logging
-import torch
-sys.path.insert(0, '.')
-import argparse
-torch.set_grad_enabled(False)
-import os
-from sklearn.cluster import KMeans
-from fast_pytorch_kmeans import KMeans
+```
+#### Imports
 
-import lib.transform_cv2 as T
-from lib.models import model_factory
-from configs import cfg_factory
+`import cv2` opencv python module 
+`import sys` 
+`import numpy as np`
+`import tensorflow as tf`
+`import pandas as pd`
+`#from libKMCUDA import kmeans_cuda` 
+`from PIL import Image,ImageOps`
+`import time`
+`import logging`
+`import torch`
+`sys.path.insert(0, '.')`
+`import argparse`
+`torch.set_grad_enabled(False)`
+`import os`
+`from sklearn.cluster import KMeans`
+`from fast_pytorch_kmeans import KMeans`
 
-np.random.seed(123)
-pal= np.random.randint(0, 256, (256, 3), dtype=np.uint8)
+`import lib.transform_cv2 as T`
+`from lib.models import model_factory`
+`from configs import cfg_factory`
 
+#### Inilitization
+`np.random.seed(123)`
+`pal= np.random.randint(0, 256, (256, 3), dtype=np.uint8)`
+The above needs to be reviewed, but I believe that it is randomly choosing colors
+
+```
 #torch_kmeans = KMeans(n_clusters=4, mode='euclidean', verbose=1) # 4 classes
 #image path
 img_path='/path/to/Directory'
@@ -40,7 +48,11 @@ img_path='/path/to/Directory'
 final_path='/path/to/Directory'
 #Path to Model save path.
 dataset='/path/to/Directory/model_final.pth'
+```
+The above gets paths to the dataset, images, and final path, but should be reviewed
 
+#### Functions
+```
 #Function for 4 calss image segmentation
 def img_seg(im,net):
     im = to_tensor(dict(im=im, lb=None))['im'].unsqueeze(0).cuda()
@@ -149,28 +161,44 @@ def col_seg(image,pool,model):
     predicts=mask_pred(msk_img,model)
     return msk_img,predicts
 
+```
 
+#### Main
+##### Commandline arguments
+```
 parse = argparse.ArgumentParser()
 parse.add_argument('--model', dest='model', type=str, default='bisenetv2',)
 parse.add_argument('--weight-path', type=str, default=dataset,)
 args = parse.parse_args()
 cfg = cfg_factory[args.model]
 
+```
+##### Load models
+```
 #Load the classification Model
 model = tf.keras.models.load_model('../classification/model/keras_model.h5')
-
 #Loading Segmentation Model.
 net = model_factory[cfg.model_type](4)
 net.load_state_dict(torch.load(args.weight_path, map_location='cpu'))
 net.eval()
 net.cuda()
-
+```
+##### Tensor
+```
 to_tensor = T.ToTensor(
     mean=(0.3257, 0.3690, 0.3223), # city, rgb
     std=(0.2112, 0.2148, 0.2115),
 )
+```
+
+##### sort images
+```
 img_list=sorted(os.listdir(img_path))
 #label_list=sorted(os.listdir(save_path))
+```
+
+##### Do semantic segmentation on images (Not actually sure what's going on here, that's just my initial guess)
+```
 for i in range(len(img_list)):
     image=cv2.imread(os.path.join(img_path,img_list[i]))
     #pool=cv2.imread(os.path.join(save_path,label_list[i]))
