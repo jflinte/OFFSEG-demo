@@ -32,16 +32,17 @@ Created on Wed Feb 10 15:07:05 2021
 `from fast_pytorch_kmeans import KMeans` PyTorch based implementation of K-Means clustering algorithm (significantly faster than sklearn.cluster,KMeans, as it has GPU acceleration support)</br>
 
 `import lib.transform_cv2 as T` import custom module</br>
-`from lib.models import model_factory` import function or class, unable to find, review </br>
-`from configs import cfg_factory` needs to be reviewed</br>
+`from lib.models import model_factory` check models/__init__.py for more details (basically gives access to BiSeNetV1 and BiSeNetV2) </br>
+`from configs import cfg_factory` check configs/__init__.py for more details (gets configeration details for BiSeNetV1 and BiSeNetV2, storing it in a dictionary)</br>
 
 #### Inilitization
-`np.random.seed(123)`
-`pal= np.random.randint(0, 256, (256, 3), dtype=np.uint8)`
-The above needs to be reviewed, but I believe that it is randomly choosing colors
+`np.random.seed(123)` generate a seed for a random number (this is legacy function and doesn't actually follow best practices, but its function here is so simple, that I don't think it really matters)
+`pal= np.random.randint(0, 256, (256, 3), dtype=np.uint8)` get array (of size 256x3) of random 8-bit unsigned integers between 0 and 256
+
+
+`#torch_kmeans = KMeans(n_clusters=4, mode='euclidean', verbose=1) # 4 classes` ignored, as it is commented out, will be returned to at later period 
 
 ```
-#torch_kmeans = KMeans(n_clusters=4, mode='euclidean', verbose=1) # 4 classes
 #image path
 img_path='/path/to/Directory'
 #result path
@@ -49,7 +50,9 @@ final_path='/path/to/Directory'
 #Path to Model save path.
 dataset='/path/to/Directory/model_final.pth'
 ```
-The above gets paths to the dataset, images, and final path, but should be reviewed
+The sets paths to images, models, etc.
+
+Note that *.pth files store model parameters, weights, or checkpoint states (or even pretrained models)
 
 #### Functions
 ```
