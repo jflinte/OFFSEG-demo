@@ -50,7 +50,7 @@ final_path='/path/to/Directory'
 #Path to Model save path.
 dataset='/path/to/Directory/model_final.pth'
 ```
-The sets paths to images, models, etc.
+This sets paths to images, models, etc.
 
 Note that *.pth files store model parameters, weights, or checkpoint states (or even pretrained models)
 
@@ -63,7 +63,15 @@ def img_seg(im,net):
     pred=pal[out]
     out=cv2.cvtColor(out.astype('uint8'),cv2.COLOR_GRAY2BGR)
     return pred , out
+```
+Note, there is a typo, as it should be 4 *class* image segmentation.
 
+References
+`image=cv2.imread(os.path.join(img_path,img_list[i]))` gets the image
+`im=image.copy()[:, :, ::-1]` copies the image, I believe reversing the channel order (as OpenCV often uses BGR, this likely converts it back to RGB)
+`pred,pool =img_seg(im,net)` 
+
+```
 #Function for Kmeans clustering.     
 def palette_lst(masked_img,n_classes=4):
     height=masked_img.shape[0]
