@@ -14,26 +14,26 @@ Created on Wed Feb 10 15:07:05 2021
 ```
 #### Imports 
 
-`import cv2` opencv python module </br>
-`import sys` </br>
-`import numpy as np` </br>
-`import tensorflow as tf` </br>
-`import pandas as pd` </br>
-`#from libKMCUDA import kmeans_cuda` </br>
-`from PIL import Image,ImageOps` </br>
-`import time` </br>
-`import logging` </br>
-`import torch` </br>
-`sys.path.insert(0, '.')` </br>
-`import argparse` </br>
-`torch.set_grad_enabled(False)` </br>
-`import os` </br>
-`from sklearn.cluster import KMeans` </br>
-`from fast_pytorch_kmeans import KMeans` </br>
+`import cv2` opencv-python, module for computer vision and machine learning </br>
+`import sys` system, module for allowing interaction with python interpreter</br>
+`import numpy as np` NumPy, module for numerical computing</br>
+`import tensorflow as tf` module for building and training ML </br>
+`import pandas as pd` module for data manipulation and analysis</br>
+`#from libKMCUDA import kmeans_cuda` from scikit-learn, needs to be studied more</br>
+`from PIL import Image,ImageOps` Pillow, module for image  processing </br>
+`import time` module with time operations</br>
+`import logging` module for event tracking (debugging, monitoring, etc.)</br>
+`import torch` PyTorch, module for deep learning and tesnor computation</br>
+`sys.path.insert(0, '.')` check current directory before checking other locations</br>
+`import argparse` module for parsing commandline arguments</br>
+`torch.set_grad_enabled(False)` disable gradient computation (autograd stops tracking operations, preventing unnecessary calculations and imporoving memory efficiency and performance)</br>
+`import os` module for interacting with the operating system</br>
+`from sklearn.cluster import KMeans` class from sklearn.cluster, used for K-Means clustering algorithm</br>
+`from fast_pytorch_kmeans import KMeans` PyTorch based implementation of K-Means clustering algorithm (significantly faster than sklearn.cluster,KMeans, as it has GPU acceleration support)</br>
 
-`import lib.transform_cv2 as T` </br>
-`from lib.models import model_factory` </br>
-`from configs import cfg_factory` </br>
+`import lib.transform_cv2 as T` import custom module</br>
+`from lib.models import model_factory` import function or class, unable to find, review </br>
+`from configs import cfg_factory` needs to be reviewed</br>
 
 #### Inilitization
 `np.random.seed(123)`
