@@ -2,7 +2,7 @@
 
 
 # Code
-`
+```
 # -*- coding: utf-8 -*-
 """
 Created on Wed Feb 10 15:07:05 2021
@@ -182,4 +182,4 @@ for i in range(len(img_list)):
     msk_img,predicts= col_seg(image,pool,model)
     final_pool=mask_comb(pool1,msk_img,predicts)
     cv2.imwrite(os.path.join(final_path,img_list[i]),pal[final_pool])
-` 
+```
