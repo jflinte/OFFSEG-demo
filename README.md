@@ -12,28 +12,28 @@ Created on Wed Feb 10 15:07:05 2021
 @author: KASI VISWANATH && KARTIKEYA SINGH
 """
 ```
-#### Imports
+#### Imports 
 
-`import cv2` opencv python module 
-`import sys` 
-`import numpy as np`
-`import tensorflow as tf`
-`import pandas as pd`
-`#from libKMCUDA import kmeans_cuda` 
-`from PIL import Image,ImageOps`
-`import time`
-`import logging`
-`import torch`
-`sys.path.insert(0, '.')`
-`import argparse`
-`torch.set_grad_enabled(False)`
-`import os`
-`from sklearn.cluster import KMeans`
-`from fast_pytorch_kmeans import KMeans`
+`import cv2` opencv python module </br>
+`import sys` </br>
+`import numpy as np` </br>
+`import tensorflow as tf` </br>
+`import pandas as pd` </br>
+`#from libKMCUDA import kmeans_cuda` </br>
+`from PIL import Image,ImageOps` </br>
+`import time` </br>
+`import logging` </br>
+`import torch` </br>
+`sys.path.insert(0, '.')` </br>
+`import argparse` </br>
+`torch.set_grad_enabled(False)` </br>
+`import os` </br>
+`from sklearn.cluster import KMeans` </br>
+`from fast_pytorch_kmeans import KMeans` </br>
 
-`import lib.transform_cv2 as T`
-`from lib.models import model_factory`
-`from configs import cfg_factory`
+`import lib.transform_cv2 as T` </br>
+`from lib.models import model_factory` </br>
+`from configs import cfg_factory` </br>
 
 #### Inilitization
 `np.random.seed(123)`
